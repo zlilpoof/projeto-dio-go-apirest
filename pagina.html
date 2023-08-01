@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cadastro de Cliente</title>
+</head>
+<body>
+    <h1>Cadastro de Cliente</h1>
+    <form action="/clientes" method="post">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome"><br>
+
+        <label for="idade">Idade:</label>
+        <input type="number" id="idade" name="idade"><br>
+
+        <label for="bolofavorito">Bolo Favorito:</label>
+        <input type="text" id="bolofavorito" name="bolofavorito"><br>
+
+        <h2>Endereço:</h2>
+        <label for="cidade">Cidade:</label>
+        <input type="text" id="cidade" name="endereco.cidade"><br>
+
+        <label for="estado">Estado:</label>
+        <input type="text" id="estado" name="endereco.estado"><br>
+
+        <input type="submit" value="Cadastrar">
+    </form>
+
+    <br>
+
+    <button onclick="window.location.href='/clientes'">Acessar Dados</button>
+
+    <br><br>
+
+    <label for="clienteId">ID do Cliente:</label>
+    <input type="text" id="clienteId" name="clienteId">
+    <button onclick="consultarCliente()">Consultar Cliente</button>
+
+    <br><br>
+
+    <label for="clienteIdDeletar">ID do Cliente:</label>
+    <input type="text" id="clienteIdDeletar" name="clienteIdDeletar">
+    <button onclick="deletarCliente()">Deletar Cliente</button>
+
+    <script>
+        function consultarCliente() {
+            var clienteId = document.getElementById("clienteId").value;
+            if (clienteId !== "") {
+                window.location.href = "/clientes/" + clienteId;
+            }
+        }
+
+        function deletarCliente() {
+            var clienteIdDeletar = document.getElementById("clienteIdDeletar").value;
+            if (clienteIdDeletar !== "") {
+                var url = "/clientes/" + clienteIdDeletar;
+                fetch(url, { method: 'DELETE' })
+                    .then(() => window.location.href = "/");
+            }
+        }
+    </script>
+
+</body>
+</html>
